@@ -1,10 +1,10 @@
 [bits 32]
-[extern print_error]
-[extern clear]
+[extern bld2_print_error]
+[extern bld2_clear]
 
-[global check]
+[global bld2_check]
 
-check:
+bld2_check:
 	pushad
 	cmp		eax, MULTIBOOT_BOOTLOADER_MAGIC
 	jne		print_multiboot_error
@@ -47,27 +47,27 @@ check:
 
 ; Error functions
 print_multiboot_error:
-	call	clear
+	call	bld2_clear
 	mov		esi, multiboot_error
-	call	print_error
+	call	bld2_print_error
 	jmp		$
 
 print_nocpuid_error:
-	call	clear
+	call	bld2_clear
 	mov		esi, cpuid_error
-	call	print_error
+	call	bld2_print_error
 	jmp		$
 
 print_nocpuid_ext_error:
-	call	clear
+	call	bld2_clear
 	mov		esi, cpuid_ext_error
-	call	print_error
+	call	bld2_print_error
 	jmp		$
 
 print_no_longmode_error:
-	call	clear
+	call	bld2_clear
 	mov		esi, longmode_error
-	call	print_error
+	call	bld2_print_error
 	jmp		$
 	
 

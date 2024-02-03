@@ -1,9 +1,9 @@
-[global clear]
-[global print_msg]
-[global print_error]
+[global bld2_clear]
+[global bld2_print_msg]
+[global bld2_print_error]
 
 [bits 32]
-clear:
+bld2_clear:
 	pushad
 	mov		ebx, vga_extent
 	mov		ecx, vga_start
@@ -31,7 +31,7 @@ clear_done:
 	popad
 	ret
 
-print_error:
+bld2_print_error:
 	pushad
 	mov		edx, vga_start
 
@@ -53,7 +53,7 @@ print_error:
 		popad
 		ret
 
-print_msg:
+bld2_print_msg:
 	pushad
 	mov		edx, vga_start
 

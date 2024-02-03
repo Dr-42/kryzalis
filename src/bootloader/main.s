@@ -1,19 +1,19 @@
 [global _start]
 
-[extern print_msg]
-[extern clear]
-[extern check]
+[extern bld2_print_msg]
+[extern bld2_clear]
+[extern bld2_check]
 
 [section .text]
 [bits 32]
 _start:
 	; print `OK`
 	mov		esp, stack_top
-	call	check
+	call	bld2_check
 
-	call	clear
+	call	bld2_clear
 	mov		esi, ok_msg
-	call	print_msg
+	call	bld2_print_msg
 	hlt
 
 ; Data
