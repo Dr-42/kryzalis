@@ -1,8 +1,25 @@
-global _start
+[global _start]
 
-section .text
-bits 32
+[extern print_msg]
+[extern clear]
+[extern check]
+
+[section .text]
+[bits 32]
 _start:
 	; print `OK`
-	mov dword [0xb8000], 0x2f4b2f4f
+	mov		esp, stack_top
+	call	check
+
+	call	clear
+	mov		esi, ok_msg
+	call	print_msg
 	hlt
+
+; Data
+ok_msg: db `Long mode is supported, please proceed`, 0
+
+[section .bss]
+stack_bottom:
+	resb	4096 * 4
+stack_top:

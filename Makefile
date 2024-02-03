@@ -14,18 +14,18 @@ build: prebuild $(BOOTLOADER_OBJS)
 	mkdir -p build/bootloader
 	$(LD) -m elf_x86_64 -T src/linker.ld -o build/bootloader/kernel.bin $(BOOTLOADER_OBJS)
 	cp build/bootloader/kernel.bin iso/boot/kernel.bin
-	grub2-mkrescue -o build/bootloader/kernel.iso iso
+	grub2-mkrescue -o build/kernel.iso iso
 
 build/bootloader/%.o: src/bootloader/%.s
-	$(ASM) -f elf64 $< -o $@
+	$(ASM) -g -f elf64 -F dwarf $< -o $@
 
 clean:
 	rm -rf build
 	rm -rf iso
 run: build
-	qemu-system-x86_64 -cdrom build/bootloader/kernel.iso
+	qemu-system-x86_64 -cdrom build/kernel.iso
 
 debug: build
-	qemu-system-x86_64 -cdrom build/bootloader/kernel.iso -s -S &
+	qemu-system-x86_64 -cdrom build/kernel.iso -s -S &
 	gdb build/bootloader/kernel.bin -ex "target remote localhost:1234"
 
