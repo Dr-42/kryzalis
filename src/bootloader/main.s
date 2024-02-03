@@ -2,14 +2,14 @@
 
 [extern bld2_print_msg]
 [extern bld2_clear]
-[extern bld2_check]
+[extern bld2_lm_check]
 
 [section .text]
 [bits 32]
 _start:
 	; print `OK`
 	mov		esp, stack_top
-	call	bld2_check
+	call	bld2_lm_check
 
 	call	bld2_clear
 	mov		esi, ok_msg

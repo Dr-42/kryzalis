@@ -2,9 +2,9 @@
 [extern bld2_print_error]
 [extern bld2_clear]
 
-[global bld2_check]
+[global bld2_lm_check]
 
-bld2_check:
+bld2_lm_check:
 	pushad
 	cmp		eax, MULTIBOOT_BOOTLOADER_MAGIC
 	jne		print_multiboot_error
