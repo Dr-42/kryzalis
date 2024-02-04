@@ -3,6 +3,7 @@ LD=ld
 ASM=nasm
 
 CFLAGS=-Wall -Wextra
+INCLUDES=-Isrc/kernel/include
 
 BOOTLOADER_ASMS=$(shell find src/bootloader -name "*.s")
 BOOTLOADER_OBJS=$(patsubst src/bootloader/%.s, build/bootloader/%.o, $(BOOTLOADER_ASMS))
@@ -26,7 +27,8 @@ build/bootloader/%.o: src/bootloader/%.s
 	$(ASM) -g -f elf64 -F dwarf $< -o $@
 
 build/kernel/%.o: src/kernel/%.c
-	$(CC) -g -c $(CFLAGS) $< -o $@
+	mkdir -p $(dir $@)
+	$(CC) -g -c $(CFLAGS) $(INCLUDES) $< -o $@
 
 clean:
 	rm -rf build
