@@ -9,6 +9,16 @@ SECTIONS
 		KEEP(*(.multiboot_header))
 	}
 
+	.data :
+	{
+		*(.data)
+	}
+
+	.rodata :
+	{
+		*(.rodata)
+	}
+
 	.text :
 	{
 		*(.text)

@@ -3,7 +3,7 @@
 [extern bld2_clear]
 
 [global bld2_lm_check]
-
+[section .text]
 bld2_lm_check:
 	pushad
 	cmp		eax, MULTIBOOT_BOOTLOADER_MAGIC
@@ -71,7 +71,7 @@ print_no_longmode_error:
 	jmp		$
 	
 
-; Data
+[section .data]
 multiboot_error db `Error: Multiboot not set up`, 0
 cpuid_error		db `Error: CPU doesn't cpuid`, 0
 cpuid_ext_error	db `Error: CPU doesn't support extended cpuid`, 0

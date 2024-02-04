@@ -3,6 +3,7 @@
 [global bld2_print_error]
 
 [bits 32]
+[section .text]
 bld2_clear:
 	pushad
 	mov		ebx, vga_extent
@@ -75,6 +76,7 @@ bld2_print_msg:
 		popad
 		ret
 
+[section .data]
 space_char:		equ ` `
 ; VGA text mode color constants
 style_red:		equ 0x04	; Red text, black background
