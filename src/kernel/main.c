@@ -1,9 +1,20 @@
-#include "drivers/vga.h"
+#include <driver/vga.h>
 
 int kernel_main() {
-	clearwin();
-	const char* welcome_msg = "Welcome to the kernel. Bye bye assembly";
-	putstr(welcome_msg);
+    set_cursor_pos(0, 0);
+    clearwin(COLOR_BLK, COLOR_PRP);
 
-	return 0;
+    const char *first = "Now we have a more advanced vga driver that does what we want!\n";
+
+    putstr(first, COLOR_WHT, COLOR_PRP);
+
+    const char *second = "It even wraps the text around the screen and moves the cursor correctly. ";
+
+    putstr(second, COLOR_WHT, COLOR_PRP);
+
+    const char *third = "But.. if we reach the end of the screen it still doesn't quite scroll properly...";
+
+    putstr(third, COLOR_WHT, COLOR_PRP);
+    
+    return 0;
 }
