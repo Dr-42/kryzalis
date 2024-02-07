@@ -22,6 +22,7 @@ void clearwin(uint8_t fg_color, uint8_t bg_color){
     for(uint64_t i = 0; i < VGA_EXTENT; i++) {
         TEXT_AREA[i] = clear_char;
     }
+    set_cursor_pos(0, VGA_HEIGHT - 1);
 }
 
 
@@ -87,7 +88,17 @@ void advance_cursor(){
     pos++;
 
     if (pos >= VGA_EXTENT){
-        pos = VGA_EXTENT - 1;
+        // Move everything up one line
+        for (uint16_t i = 0; i < VGA_EXTENT - VGA_WIDTH; i++){
+            TEXT_AREA[i] = TEXT_AREA[i + VGA_WIDTH];
+        }
+
+        // Clear the last line
+        for (uint16_t i = VGA_EXTENT - VGA_WIDTH; i < VGA_EXTENT; i++){
+            TEXT_AREA[i].character = ' ';
+        }
+
+        pos = VGA_EXTENT - VGA_WIDTH;
     }
 
     byte_out(CURSOR_PORT_COMMAND, 0x0F);
